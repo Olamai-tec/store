@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhoneStore - Catálogo Exclusivo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+        .card-hover:hover { transform: translateY(-5px); transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+
+    <nav class="sticky top-0 z-50 glass border-b border-gray-200 py-4 px-6 flex justify-between items-center">
+        <h1 class="text-2xl font-bold tracking-tighter text-blue-600">MY<span class="text-black">STORE</span></h1>
+        <div class="text-sm font-medium bg-green-100 text-green-700 px-3 py-1 rounded-full">
+            <i class="fa-solid fa-bolt text-xs"></i> Dólar Hoy: <span id="dolar-val">...</span>
+        </div>
+    </nav>
+
+    <header class="py-12 px-6 text-center bg-white">
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Equipos Premium a Precio de Gremio</h2>
+        <p class="text-gray-500 max-w-2xl mx-auto italic">Precios actualizados diariamente. Consultar stock por WhatsApp.</p>
+    </header>
+
+    <div class="max-w-6xl mx-auto px-6 mb-8 flex flex-wrap gap-2">
+        <button onclick="filter('all')" class="bg-black text-white px-4 py-2 rounded-lg text-sm">Todos</button>
+        <button onclick="filter('iPhone')" class="bg-white border px-4 py-2 rounded-lg text-sm hover:bg-gray-100">iPhone</button>
+        <button onclick="filter('Samsung')" class="bg-white border px-4 py-2 rounded-lg text-sm hover:bg-gray-100">Samsung</button>
+        <button onclick="filter('Xiaomi')" class="bg-white border px-4 py-2 rounded-lg text-sm hover:bg-gray-100">Xiaomi</button>
+    </div>
+
+    <main id="product-grid" class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-20">
+        </main>
+
+    <a href="https://wa.me/TUNUMERO" class="fixed bottom-6 right-6 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </a>
+
+    <script>
+        // CONFIGURACIÓN DE TU GANANCIA
+        const DOLAR_BLUE = 1250; // Ajustar según el día
+        
+        const products = [
+            { name: "iPhone 17 Pro Max 256GB", brand: "iPhone", cost: 1500, cat: "high" },
+            { name: "iPhone 17 Pro 512GB", brand: "iPhone", cost: 1550, cat: "high" },
+            { name: "Samsung S25 Ultra 512GB", brand: "Samsung", cost: 1130, cat: "high" },
+            { name: "Galaxy A56 256GB", brand: "Samsung", cost: 400, cat: "mid" },
+            { name: "Redmi Note 15 Pro 5G", brand: "Xiaomi", cost: 340, cat: "mid" },
+            { name: "Galaxy A16 128GB", brand: "Samsung", cost: 140, cat: "low" },
+            { name: "Redmi 15C 256GB", brand: "Xiaomi", cost: 150, cat: "low" },
+            { name: "Poco C71 64GB", brand: "Xiaomi", cost: 90, cat: "low" }
+        ];
+
+        function calculatePrice(cost, cat) {
+            let margin = 1.06; // Alta gama 6%
+            if(cat === 'mid') margin = 1.10; // Media 10%
+            if(cat === 'low') margin = 1.15; // Baja 15%
+            return Math.round(cost * margin);
+        }
+
+        function renderProducts(filterBrand = 'all') {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            
+            const filtered = filterBrand === 'all' ? products : products.filter(p => p.brand === filterBrand);
+
+            filtered.forEach(p => {
+                const finalUSD = calculatePrice(p.cost, p.cat);
+                const finalARS = new Intl.NumberFormat('es-AR').format(finalUSD * DOLAR_BLUE);
+                
+                grid.innerHTML += `
+                    <div class="bg-white border border-gray-100 rounded-2xl p-6 card-hover shadow-sm hover:shadow-xl">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-blue-500">${p.brand}</span>
+                        <h3 class="text-xl font-bold mt-1 mb-4">${p.name}</h3>
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <p class="text-3xl font-black text-gray-900">USD ${finalUSD}</p>
+                                <p class="text-sm text-gray-400">ARS ${finalARS}</p>
+                            </div>
+                            <button class="bg-black text-white text-xs font-bold py-2 px-4 rounded-full uppercase">Consultar</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function filter(brand) { renderProducts(brand); }
+        document.getElementById('dolar-val').innerText = `$${DOLAR_BLUE}`;
+        renderProducts();
+    </script>
+</body>
+</html>
