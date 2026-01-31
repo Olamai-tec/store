@@ -33,10 +33,10 @@
     </nav>
 
     <header class="pt-36 pb-12 text-center px-4">
-        <h1 class="text-5xl md:text-8xl font-black mb-4 tech-gradient text-transparent bg-clip-text italic tracking-tighter">OLAMAI STOCK</h1>
+        <h1 class="text-5xl md:text-8xl font-black mb-4 tech-gradient text-transparent bg-clip-text italic tracking-tighter uppercase">OLAMAI STOCK</h1>
         <p class="text-gray-400 max-w-2xl mx-auto text-sm md:text-lg font-light">
             Ecosistema de Tecnología, Perfumería de Nicho y Hogar Inteligente. <br>
-            <span class="text-blue-500 font-bold uppercase text-xs">Precios Unificados 2026</span>
+            <span class="text-blue-500 font-bold uppercase text-xs">Consultas Directas vía Mail</span>
         </p>
     </header>
 
@@ -55,17 +55,14 @@
             <button onclick="filterMain('perfumes')" class="cat-main px-8 py-3 rounded-2xl border border-white/10 text-xs font-black uppercase tracking-widest transition-all">Perfumes</button>
             <button onclick="filterMain('relojes')" class="cat-main px-8 py-3 rounded-2xl border border-white/10 text-xs font-black uppercase tracking-widest transition-all">Relojes</button>
             <button onclick="filterMain('consolas')" class="cat-main px-8 py-3 rounded-2xl border border-white/10 text-xs font-black uppercase tracking-widest transition-all">Consolas</button>
-            <button onclick="filterMain('otros')" class="cat-main px-8 py-3 rounded-2xl border border-white/10 text-xs font-black uppercase tracking-widest transition-all">Hogar/Audio</button>
+            <button onclick="filterMain('otros')" class="cat-main px-8 py-3 rounded-2xl border border-white/10 text-xs font-black uppercase tracking-widest transition-all">Otros</button>
         </div>
 
-        <div id="subFilters" class="flex flex-wrap justify-center gap-2 mt-6 hidden opacity-0 transition-opacity duration-500">
+        <div id="subFilters" class="flex flex-wrap justify-center gap-2 mt-6 hidden">
             <button onclick="filterBrand('Apple')" class="px-4 py-2 bg-white/5 rounded-xl text-[10px] font-bold hover:bg-blue-600 transition uppercase">iPhone</button>
             <button onclick="filterBrand('Samsung')" class="px-4 py-2 bg-white/5 rounded-xl text-[10px] font-bold hover:bg-blue-600 transition uppercase">Samsung</button>
             <button onclick="filterBrand('Motorola')" class="px-4 py-2 bg-white/5 rounded-xl text-[10px] font-bold hover:bg-blue-600 transition uppercase">Motorola</button>
             <button onclick="filterBrand('Xiaomi')" class="px-4 py-2 bg-white/5 rounded-xl text-[10px] font-bold hover:bg-blue-600 transition uppercase">Xiaomi</button>
-            <button onclick="filterBrand('Honor')" class="px-4 py-2 bg-white/5 rounded-xl text-[10px] font-bold hover:bg-blue-600 transition uppercase">Honor</button>
-            <button onclick="filterBrand('Realme')" class="px-4 py-2 bg-white/5 rounded-xl text-[10px] font-bold hover:bg-blue-600 transition uppercase">Realme</button>
-            <button onclick="filterBrand('Google')" class="px-4 py-2 bg-white/5 rounded-xl text-[10px] font-bold hover:bg-blue-600 transition uppercase">Pixel</button>
         </div>
     </section>
 
@@ -74,176 +71,66 @@
             </div>
     </main>
 
-    <footer class="py-10 border-t border-white/10 text-center text-gray-600 text-[10px] tracking-widest uppercase font-bold">
-        &copy; 2026 OLAMAI-TEC - High Tech Logistics
-    </footer>
-
     <script>
-        const COTIZACION_DOLAR = 1380; // Ajustar manualmente según necesidad
+        const COTIZACION_DOLAR = 1380;
+        const TU_EMAIL = "olamai-tec@proton.me"; // CAMBIÁ ESTO POR TU MAIL REAL
 
-        // --- BASE DE DATOS COMPLETA SIN FILTROS (TODOS LOS PRODUCTOS) ---
         const db = [
             // IPHONE
-            { brand: "Apple", name: "iPhone 16 Pro Max 1TB", cat: "celulares", price: 1890 },
-            { brand: "Apple", name: "iPhone 16 Pro Max 512GB", cat: "celulares", price: 1640 },
             { brand: "Apple", name: "iPhone 16 Pro Max 256GB", cat: "celulares", price: 1420 },
-            { brand: "Apple", name: "iPhone 16 Pro 512GB", cat: "celulares", price: 1490 },
-            { brand: "Apple", name: "iPhone 16 Pro 256GB", cat: "celulares", price: 1320 },
             { brand: "Apple", name: "iPhone 16 Pro 128GB", cat: "celulares", price: 1210 },
-            { brand: "Apple", name: "iPhone 16 Plus 128GB", cat: "celulares", price: 1045 },
-            { brand: "Apple", name: "iPhone 16 256GB", cat: "celulares", price: 1040 },
             { brand: "Apple", name: "iPhone 16 128GB", cat: "celulares", price: 925 },
-            { brand: "Apple", name: "iPhone 15 Pro Max 256GB", cat: "celulares", price: 1280 },
-            { brand: "Apple", name: "iPhone 15 Pro 128GB", cat: "celulares", price: 1090 },
             { brand: "Apple", name: "iPhone 15 128GB", cat: "celulares", price: 815 },
             { brand: "Apple", name: "iPhone 14 128GB", cat: "celulares", price: 730 },
             { brand: "Apple", name: "iPhone 13 128GB", cat: "celulares", price: 640 },
-            { brand: "Apple", name: "iPhone 12 64GB New", cat: "celulares", price: 510 },
             { brand: "Apple", name: "iPhone 11 64GB New", cat: "celulares", price: 425 },
 
             // SAMSUNG
             { brand: "Samsung", name: "Galaxy S25 Ultra 512GB", cat: "celulares", price: 1380 },
-            { brand: "Samsung", name: "Galaxy S25 Ultra 256GB", cat: "celulares", price: 1290 },
-            { brand: "Samsung", name: "Galaxy S25 Plus 256GB", cat: "celulares", price: 1150 },
             { brand: "Samsung", name: "Galaxy S24 Ultra 256GB", cat: "celulares", price: 1195 },
-            { brand: "Samsung", name: "Galaxy S24 Plus 256GB", cat: "celulares", price: 980 },
             { brand: "Samsung", name: "Galaxy S24 FE 128GB", cat: "celulares", price: 745 },
-            { brand: "Samsung", name: "Galaxy Z Fold 6 256GB", cat: "celulares", price: 1650 },
-            { brand: "Samsung", name: "Galaxy Z Flip 6 256GB", cat: "celulares", price: 1080 },
             { brand: "Samsung", name: "Galaxy A55 256GB", cat: "celulares", price: 510 },
             { brand: "Samsung", name: "Galaxy A35 128GB", cat: "celulares", price: 395 },
-            { brand: "Samsung", name: "Galaxy A25 128GB", cat: "celulares", price: 315 },
             { brand: "Samsung", name: "Galaxy A15 128GB", cat: "celulares", price: 210 },
-            { brand: "Samsung", name: "Galaxy A05s 128GB", cat: "celulares", price: 185 },
 
             // MOTOROLA
             { brand: "Motorola", name: "Edge 50 Ultra 512GB", cat: "celulares", price: 1150 },
             { brand: "Motorola", name: "Edge 50 Pro 512GB", cat: "celulares", price: 720 },
-            { brand: "Motorola", name: "Edge 50 Fusion 256GB", cat: "celulares", price: 540 },
-            { brand: "Motorola", name: "Razr 50 Ultra 512GB", cat: "celulares", price: 1050 },
             { brand: "Motorola", name: "Moto G85 5G 256GB", cat: "celulares", price: 385 },
-            { brand: "Motorola", name: "Moto G54 5G 128GB", cat: "celulares", price: 295 },
-            { brand: "Motorola", name: "Moto G24 Power 256GB", cat: "celulares", price: 215 },
 
-            // XIAOMI / HONOR / PIXEL / REALME
+            // XIAOMI
             { brand: "Xiaomi", name: "Xiaomi 14 Ultra 512GB", cat: "celulares", price: 1250 },
             { brand: "Xiaomi", name: "Poco F6 Pro 512GB", cat: "celulares", price: 680 },
             { brand: "Xiaomi", name: "Redmi Note 13 Pro+ 5G", cat: "celulares", price: 495 },
-            { brand: "Xiaomi", name: "Redmi 13C 128GB", cat: "celulares", price: 175 },
-            { brand: "Honor", name: "Honor 200 Pro 5G", cat: "celulares", price: 815 },
-            { brand: "Honor", name: "Honor Magic 6 Lite", cat: "celulares", price: 410 },
-            { brand: "Realme", name: "Realme GT 6 512GB", cat: "celulares", price: 740 },
-            { brand: "Google", name: "Pixel 9 Pro XL 256GB", cat: "celulares", price: 1350 },
-            { brand: "Google", name: "Pixel 9 128GB", cat: "celulares", price: 980 },
 
             // PERFUMERIA NICHO
             { brand: "Xerjoff", name: "Tony Iommi Monkey Special 100ml", cat: "perfumes", price: 375 },
             { brand: "Xerjoff", name: "Alexandria III 50ml Parfum", cat: "perfumes", price: 375 },
             { brand: "Xerjoff", name: "Erba Pura 100ml EDP", cat: "perfumes", price: 300 },
-            { brand: "Xerjoff", name: "Naxos 100ml EDP", cat: "perfumes", price: 295 },
             { brand: "Creed", name: "Viking 100ml EDP", cat: "perfumes", price: 430 },
-            { brand: "Creed", name: "Aventus 100ml EDP", cat: "perfumes", price: 460 },
             { brand: "Tom Ford", name: "Lost Cherry 100ml EDP", cat: "perfumes", price: 405 },
-            { brand: "Tom Ford", name: "F***ing Fabulous 100ml EDP", cat: "perfumes", price: 506 },
-            { brand: "Bond No. 9", name: "Central Park West 100ml", cat: "perfumes", price: 368 },
-            { brand: "Kilian", name: "Intoxicated 50ml EDP", cat: "perfumes", price: 311 },
 
             // PERFUMERIA DISEÑADOR
             { brand: "Lacoste", name: "Booster 125ml EDT", cat: "perfumes", price: 62 },
             { brand: "Lacoste", name: "L.12.12 Blanc 100ml EDT", cat: "perfumes", price: 83 },
             { brand: "Lancome", name: "La Vie Est Belle 100ml EDP", cat: "perfumes", price: 106 },
-            { brand: "Lancome", name: "Idole Now 100ml Parfum", cat: "perfumes", price: 118 },
             { brand: "Mont Blanc", name: "Explorer 100ml EDP", cat: "perfumes", price: 76 },
             { brand: "Paco Rabanne", name: "1 Million 100ml EDT", cat: "perfumes", price: 86 },
-            { brand: "Versace", name: "Eros 200ml EDT", cat: "perfumes", price: 105 },
-            { brand: "Victoria Secret", name: "Bombshell 100ml EDP", cat: "perfumes", price: 115 },
 
             // CONSOLAS
             { brand: "Sony", name: "PlayStation 5 Pro 2TB", cat: "consolas", price: 950 },
             { brand: "Sony", name: "PlayStation 5 Slim 1TB", cat: "consolas", price: 720 },
             { brand: "Nintendo", name: "Switch OLED Mario Edition", cat: "consolas", price: 425 },
-            { brand: "Nintendo", name: "Switch Lite", cat: "consolas", price: 265 },
-            { brand: "Microsoft", name: "Xbox Series X 1TB", cat: "consolas", price: 740 },
 
-            // SMARTWATCH
+            // RELOJES
             { brand: "Apple", name: "Watch Ultra 2 (49mm)", cat: "relojes", price: 895 },
-            { brand: "Apple", name: "Watch Series 10 (45mm)", cat: "relojes", price: 540 },
             { brand: "Garmin", name: "Fenix 8 Solar 47mm", cat: "relojes", price: 1150 },
-            { brand: "Garmin", name: "Forerunner 965", cat: "relojes", price: 740 },
             { brand: "Samsung", name: "Galaxy Watch Ultra", cat: "relojes", price: 680 },
 
-            // OTROS (JBL / XIAOMI HOGAR)
+            // OTROS
             { brand: "JBL", name: "PartyBox 710", cat: "otros", price: 885 },
-            { brand: "JBL", name: "PartyBox Club 120", cat: "otros", price: 462 },
-            { brand: "JBL", name: "Boombox 4 Bluetooth", cat: "otros", price: 542 },
-            { brand: "JBL", name: "Xtreme 4 Bluetooth", cat: "otros", price: 288 },
             { brand: "Xiaomi", name: "Vacuum X20 Max", cat: "otros", price: 775 },
-            { brand: "Xiaomi", name: "Vacuum S20+ Bivolt", cat: "otros", price: 440 },
-            { brand: "Xiaomi", name: "Vacuum E10 White", cat: "otros", price: 215 },
             { brand: "Karseell", name: "Mascara Capilar Colageno 500ml", cat: "otros", price: 35 }
         ];
 
-        const grid = document.getElementById('productGrid');
-        const searchInput = document.getElementById('searchInput');
-
-        function render(items) {
-            grid.innerHTML = '';
-            items.forEach(p => {
-                const precioArs = (p.price * COTIZACION_DOLAR).toLocaleString('es-AR');
-                grid.innerHTML += `
-                    <div class="card-product glass p-5 rounded-[2rem] flex flex-col items-center text-center relative overflow-hidden group">
-                        <div class="absolute top-0 right-0 p-3">
-                            <i class="fas fa-plus-circle text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        </div>
-                        <div class="mb-4">
-                            <span class="text-[9px] font-black text-blue-400 border border-blue-400/30 px-3 py-1 rounded-full uppercase tracking-tighter bg-blue-400/5">
-                                ${p.brand}
-                            </span>
-                        </div>
-                        <h3 class="text-xs font-bold h-10 overflow-hidden mb-6 leading-tight">${p.name}</h3>
-                        <div class="mt-auto w-full">
-                            <div class="text-3xl font-black text-white italic mb-1">u$s ${p.price}</div>
-                            <div class="text-[10px] text-gray-500 font-bold mb-6 tracking-widest leading-none">AR$ ${precioArs}</div>
-                            <a href="https://wa.me/5491122334455?text=Hola OLAMAI-TEC! Estoy interesado en: ${p.name}" 
-                               target="_blank" 
-                               class="bg-white/10 hover:bg-blue-600 block w-full py-4 rounded-2xl text-[10px] font-black transition-all uppercase tracking-widest border border-white/5">
-                                Consultar
-                            </a>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        function filterMain(cat) {
-            document.querySelectorAll('.cat-main').forEach(b => b.classList.remove('active-filter'));
-            event.target.classList.add('active-filter');
-            
-            const sub = document.getElementById('subFilters');
-            if (cat === 'celulares') {
-                sub.classList.remove('hidden');
-                setTimeout(() => sub.classList.add('opacity-100'), 10);
-            } else {
-                sub.classList.add('hidden', 'opacity-0');
-            }
-
-            const res = cat === 'all' ? db : db.filter(p => p.cat === cat);
-            render(res);
-        }
-
-        function filterBrand(brand) {
-            const res = db.filter(p => p.brand === brand);
-            render(res);
-        }
-
-        searchInput.addEventListener('input', (e) => {
-            const t = e.target.value.toLowerCase();
-            const res = db.filter(p => p.name.toLowerCase().includes(t) || p.brand.toLowerCase().includes(t));
-            render(res);
-        });
-
-        // Inicio
-        render(db);
-    </script>
-</body>
-</html>
+        const grid = document
