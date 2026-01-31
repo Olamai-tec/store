@@ -3,127 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OLAMAI-TEC | Catálogo Consolidado</title>
+    <title>OLAMAI-TEC | Luxury & Tech Store 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050505; color: white; scroll-behavior: smooth; }
-        .glass { background: rgba(15, 15, 15, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .tech-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); background: #0f0f0f; border: 1px solid rgba(255,255,255,0.05); }
-        .tech-card:hover { transform: translateY(-8px); border-color: #4361ee; box-shadow: 0 15px 30px rgba(67, 97, 238, 0.15); }
-        .text-gradient { background: linear-gradient(90deg, #4361ee, #4cc9f0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .price-badge { background: linear-gradient(45deg, #1e1e1e, #2d2d2d); border-left: 3px solid #4361ee; }
+        :root {
+            --tech-blue: #00d2ff;
+            --tech-purple: #9258ff;
+        }
+        body {
+            background-color: #050505;
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: var(--tech-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #050505 0%, #1a1a2e 100%);
+        }
+        .neon-text {
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+        }
+        .category-pill {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .category-pill:hover {
+            border-color: var(--tech-purple);
+            background: rgba(146, 88, 255, 0.1);
+        }
     </style>
 </head>
 <body>
 
-    <nav class="sticky top-0 z-50 glass py-4 px-6 flex justify-between items-center border-b border-white/5">
-        <div class="flex items-center gap-2">
-            <div class="bg-blue-600 p-1.5 rounded-lg text-white"><i class="fa-solid fa-microchip"></i></div>
-            <span class="text-xl font-extrabold tracking-tighter uppercase">OLAMAI<span class="text-blue-500">-TEC</span></span>
+    <nav class="flex justify-between items-center p-6 bg-black/50 sticky top-0 z-50 backdrop-blur-md border-b border-white/10">
+        <div class="text-2xl font-black tracking-tighter text-white">OLAMAI<span class="text-blue-500">-TEC</span></div>
+        <div class="hidden md:flex gap-8 text-sm uppercase tracking-widest font-bold">
+            <a href="#tech" class="hover:text-blue-400">Tecno</a>
+            <a href="#perfumes" class="hover:text-purple-400">Fragancias</a>
+            <a href="#hogar" class="hover:text-green-400">Home Intel</a>
         </div>
-        <div class="bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-full text-[10px] font-bold text-blue-400 uppercase">
-            Cotización Venta: <span id="dolar-val">$...</span>
-        </div>
+        <button class="bg-blue-600 px-6 py-2 rounded-full font-bold text-sm hover:bg-blue-400 transition">SOPORTE WHATSAPP</button>
     </nav>
 
-    <header class="pt-16 pb-12 px-6 text-center">
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 uppercase italic">Stock Maestro</h1>
-        <p class="text-gray-500 text-sm max-w-xl mx-auto font-light">
-            Seleccionamos el precio más bajo de <span class="text-white">TotalTech, Undertec, GrupoTec y MercadoSitio</span>. <br>
-            Lo que ves aquí es el costo final con tu ganancia aplicada.
-        </p>
+    <header class="relative h-[70vh] flex items-center justify-center overflow-hidden hero-gradient border-b border-white/5">
+        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(var(--tech-blue) 1px, transparent 1px); background-size: 30px 30px;"></div>
+        <div class="text-center z-10 px-4">
+            <h1 class="text-6xl md:text-8xl font-black mb-4 tracking-tight neon-text">EL FUTURO <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">EN TU MANO</span></h1>
+            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-8 font-light italic">
+                Importación directa de tecnología exclusiva, fragancias de nicho y domótica inteligente.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <span class="category-pill"><i class="fas fa-mobile-alt mr-2"></i> Smartphones</span>
+                <span class="category-pill"><i class="fas fa-volume-up mr-2"></i> Audio Premium</span>
+                <span class="category-pill"><i class="fas fa-spray-can mr-2"></i> Nicho</span>
+            </div>
+        </div>
     </header>
 
-    <div class="flex flex-wrap justify-center gap-2 mb-10 px-4">
-        <button onclick="filter('all')" class="bg-blue-600 px-6 py-2 rounded-full text-xs font-bold uppercase">Todos</button>
-        <button onclick="filter('iPhone')" class="glass px-6 py-2 rounded-full text-xs font-bold uppercase">iPhone</button>
-        <button onclick="filter('Samsung')" class="glass px-6 py-2 rounded-full text-xs font-bold uppercase">Samsung</button>
-        <button onclick="filter('Xiaomi')" class="glass px-6 py-2 rounded-full text-xs font-bold uppercase">Xiaomi</button>
-        <button onclick="filter('Accesorios')" class="glass px-6 py-2 rounded-full text-xs font-bold uppercase">Accesorios</button>
-    </div>
+    <main class="max-w-7xl mx-auto py-16 px-6">
+        
+        <h2 class="text-3xl font-bold mb-8 border-l-4 border-blue-500 pl-4">AUDIO PROFESIONAL</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-20">
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="text-xs text-blue-400 font-bold mb-2">NUEVA GENERACIÓN</div>
+                <h3 class="text-xl font-bold mb-1">JBL Boombox 4</h3>
+                <p class="text-gray-500 text-sm mb-4">Bluetooth 5.4 | Waterproof</p>
+                <div class="text-2xl font-black mb-4">u$s 535</div>
+                <button class="w-full py-3 bg-white text-black font-bold rounded-xl hover:bg-blue-400 transition">COMPRAR</button>
+            </div>
+            </div>
 
-    <main id="product-grid" class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pb-24">
-        </main>
+        <h2 class="text-3xl font-bold mb-8 border-l-4 border-green-500 pl-4">INTELIGENCIA EN EL HOGAR</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-20">
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="text-xs text-green-400 font-bold mb-2">SMART CLEANING</div>
+                <h3 class="text-xl font-bold mb-1">Vacuum X20 Max</h3>
+                <p class="text-gray-500 text-sm mb-4">Potencia Extrema 220V</p>
+                <div class="text-2xl font-black mb-4">u$s 765</div>
+                <button class="w-full py-3 border border-white/20 rounded-xl hover:bg-green-600 transition">VER FICHA</button>
+            </div>
+        </div>
 
-    <a href="https://wa.me/PONETUNUMERO" class="fixed bottom-6 right-6 bg-[#25d366] text-white p-5 rounded-2xl shadow-2xl hover:scale-110 transition-transform z-50">
-        <i class="fa-brands fa-whatsapp text-3xl"></i>
-    </a>
+        <h2 class="text-3xl font-bold mb-8 border-l-4 border-purple-500 pl-4">FRAGANCIAS DE AUTOR (EXCLUSIVO)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="glass-card p-8 rounded-3xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-purple-600 px-4 py-1 rounded-bl-xl text-xs font-bold">TOP NICHO</div>
+                <h3 class="text-2xl font-bold mb-2">Xerjoff Tony Iommi</h3>
+                <p class="text-gray-400 mb-4 italic">Monkey Special | 100ml Parfum</p>
+                <div class="text-3xl font-black text-purple-400 mb-6">u$s 375</div>
+                <button class="w-full py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl font-bold">CONSULTAR STOCK</button>
+            </div>
+        </div>
 
-    <script>
-        // CONFIGURACIÓN: Modificá solo esto
-        const DOLAR_HOY = 1260; // Dólar Blue Venta Actual
-        const MARGEN_VENTA = 1.02; // Tu colchón del 2% por si sube el dólar
-        const TIPO_CAMBIO = Math.round(DOLAR_HOY * MARGEN_VENTA);
+    </main>
 
-        // LISTA DE PRODUCTOS CON EL MEJOR PRECIO ENCONTRADO (COSTO BASE)
-        const products = [
-            // IPHONES (Costo más bajo entre Undertec/TotalTech)
-            { name: "iPhone 17 Pro Max 256GB", brand: "iPhone", cost: 1490, cat: "high", img: "https://m.media-amazon.com/images/I/71Y82A9-f1L._AC_SL1500_.jpg" },
-            { name: "iPhone 17 Pro 256GB", brand: "iPhone", cost: 1340, cat: "high", img: "https://m.media-amazon.com/images/I/61f4ayf805L._AC_SL1500_.jpg" },
-            { name: "iPhone 16 Pro Max 256GB", brand: "iPhone", cost: 1250, cat: "high", img: "https://m.media-amazon.com/images/I/61LtoU0uWGL._AC_SL1500_.jpg" },
-            { name: "iPhone 15 128GB", brand: "iPhone", cost: 790, cat: "high", img: "https://m.media-amazon.com/images/I/71v2jVh6nIL._AC_SL1500_.jpg" },
-            { name: "iPhone 13 128GB", brand: "iPhone", cost: 575, cat: "mid", img: "https://m.media-amazon.com/images/I/71gm8v4uPBL._AC_SL1500_.jpg" },
+    <footer class="p-10 text-center border-t border-white/10 text-gray-600 text-sm">
+        <p>&copy; 2026 OLAMAI-TEC - Buenos Aires, Argentina. No aceptamos imitaciones.</p>
+    </footer>
 
-            // SAMSUNG (Costo más bajo entre TotalTech/GrupoTec)
-            { name: "Galaxy S25 Ultra 512GB", brand: "Samsung", cost: 1120, cat: "high", img: "https://m.media-amazon.com/images/I/71f6BpS2B0L._AC_SL1500_.jpg" },
-            { name: "Galaxy S25 Plus 256GB", brand: "Samsung", cost: 960, cat: "high", img: "https://m.media-amazon.com/images/I/71Ltp6T7-SL._AC_SL1500_.jpg" },
-            { name: "Galaxy A56 5G 256GB", brand: "Samsung", cost: 410, cat: "mid", img: "https://m.media-amazon.com/images/I/71S-v8D4UdL._AC_SL1500_.jpg" },
-            { name: "Galaxy A36 5G 128GB", brand: "Samsung", cost: 320, cat: "mid", img: "https://m.media-amazon.com/images/I/712W1-hWz1L._AC_SL1500_.jpg" },
-            { name: "Galaxy A16 128GB", brand: "Samsung", cost: 160, cat: "low", img: "https://m.media-amazon.com/images/I/61N99zH-UFL._AC_SL1500_.jpg" },
-
-            // XIAOMI (Costo más bajo entre MercadoSitio/TotalTech)
-            { name: "Redmi Note 15 Pro Plus 512GB", brand: "Xiaomi", cost: 385, cat: "mid", img: "https://m.media-amazon.com/images/I/61zN5mC0DGL._AC_SL1500_.jpg" },
-            { name: "Redmi Note 15 Pro 5G", brand: "Xiaomi", cost: 335, cat: "mid", img: "https://m.media-amazon.com/images/I/61T0f9B5TGL._AC_SL1500_.jpg" },
-            { name: "Poco X7 Pro 5G 256GB", brand: "Xiaomi", cost: 295, cat: "mid", img: "https://m.media-amazon.com/images/I/61zN5mC0DGL._AC_SL1500_.jpg" },
-            { name: "Redmi 15C 128GB", brand: "Xiaomi", cost: 135, cat: "low", img: "https://m.media-amazon.com/images/I/61K6K9L9L._AC_SL1500_.jpg" },
-
-            // ACCESORIOS (Costo más bajo consolidado)
-            { name: "AirPods Pro 2 Gen USB-C", brand: "Accesorios", cost: 235, cat: "mid", img: "https://m.media-amazon.com/images/I/61SUj2W5yXL._AC_SL1500_.jpg" },
-            { name: "Cargador 25W Samsung Original", brand: "Accesorios", cost: 12, cat: "low", img: "https://m.media-amazon.com/images/I/51U68M79rWL._AC_SL1500_.jpg" },
-            { name: "Cargador 20W Apple Original", brand: "Accesorios", cost: 18, cat: "low", img: "https://m.media-amazon.com/images/I/41-q0-Q9YLL._AC_SL1500_.jpg" },
-            { name: "MagSafe Battery Pack", brand: "Accesorios", cost: 35, cat: "low", img: "https://m.media-amazon.com/images/I/41-q0-Q9YLL._AC_SL1500_.jpg" },
-            { name: "Cable USB-C a USB-C 1m", brand: "Accesorios", cost: 8, cat: "low", img: "https://m.media-amazon.com/images/I/51B8H7Y5YXL._AC_SL1500_.jpg" }
-        ];
-
-        function getVentaUSD(cost, cat) {
-            if(cat === 'high') return Math.round(cost * 1.06); // Ganas 6%
-            if(cat === 'mid') return Math.round(cost * 1.10);  // Ganas 10%
-            return Math.round(cost * 1.15); // Ganas 15% (baja/accesorios)
-        }
-
-        function render(f = 'all') {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = '';
-            const filtered = f === 'all' ? products : products.filter(p => p.brand === f);
-
-            filtered.forEach(p => {
-                const usd = getVentaUSD(p.cost, p.cat);
-                const ars = new Intl.NumberFormat('es-AR').format(usd * TIPO_CAMBIO);
-                grid.innerHTML += `
-                    <div class="tech-card rounded-[2.5rem] overflow-hidden flex flex-col p-4">
-                        <img src="${p.img}" class="w-full h-40 object-contain my-4 opacity-90" alt="${p.name}">
-                        <div class="px-2 pb-2 flex-grow flex flex-col">
-                            <span class="text-[9px] font-black uppercase text-blue-500 tracking-[0.2em] mb-1">${p.brand}</span>
-                            <h3 class="text-xs font-bold leading-tight mb-4 h-8 overflow-hidden">${p.name}</h3>
-                            <div class="mt-auto price-badge p-3 rounded-2xl">
-                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Oferta Cash</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-xl font-black">USD ${usd}</span>
-                                    <a href="https://wa.me/PONETUNUMERO?text=Hola! Quiero el ${p.name}" class="text-blue-500"><i class="fa-solid fa-arrow-right"></i></a>
-                                </div>
-                                <p class="text-[9px] text-gray-500 mt-1">~ ARS ${ars}</p>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        function filter(b) { render(b); }
-        document.getElementById('dolar-val').innerText = `$${TIPO_CAMBIO}`;
-        render();
-    </script>
 </body>
 </html>
