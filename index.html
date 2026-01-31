@@ -1,61 +1,111 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhoneStore - Catálogo Exclusivo</title>
+    <title>OLAMAI-TEC | Tecnología Premium</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
-        .card-hover:hover { transform: translateY(-5px); transition: all 0.3s ease; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050505; color: white; }
+        .glass { background: rgba(15, 15, 15, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #16213e 100%);
+            position: relative; overflow: hidden;
+        }
+        .hero-gradient::after {
+            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(67, 97, 238, 0.15) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .tech-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .tech-card:hover { transform: translateY(-10px); border-color: #4361ee; box-shadow: 0 20px 40px rgba(67, 97, 238, 0.2); }
+        .text-gradient { background: linear-gradient(90deg, #4361ee, #4cc9f0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans">
+<body>
 
-    <nav class="sticky top-0 z-50 glass border-b border-gray-200 py-4 px-6 flex justify-between items-center">
-        <h1 class="text-2xl font-bold tracking-tighter text-blue-600">MY<span class="text-black">STORE</span></h1>
-        <div class="text-sm font-medium bg-green-100 text-green-700 px-3 py-1 rounded-full">
-            <i class="fa-solid fa-bolt text-xs"></i> Dólar Hoy: <span id="dolar-val">...</span>
+    <nav class="sticky top-0 z-50 glass py-4 px-8 flex justify-between items-center mx-4 mt-4 rounded-2xl">
+        <div class="flex items-center gap-2">
+            <div class="bg-blue-600 p-2 rounded-lg">
+                <i class="fa-solid fa-microchip text-xl text-white"></i>
+            </div>
+            <span class="text-2xl font-extrabold tracking-tighter uppercase">OLAMAI<span class="text-blue-500">-TEC</span></span>
+        </div>
+        <div class="hidden md:flex bg-white/5 border border-white/10 px-4 py-2 rounded-xl items-center gap-3">
+            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Cotización Ref:</span>
+            <span class="text-green-400 font-bold" id="dolar-val">Cargando...</span>
         </div>
     </nav>
 
-    <header class="py-12 px-6 text-center bg-white">
-        <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Equipos Premium a Precio de Gremio</h2>
-        <p class="text-gray-500 max-w-2xl mx-auto italic">Precios actualizados diariamente. Consultar stock por WhatsApp.</p>
-    </header>
+    <section class="hero-gradient pt-20 pb-16 px-6 text-center rounded-b-[60px]">
+        <div class="relative z-10">
+            <span class="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Store Oficial 2026</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold mt-6 mb-4 tracking-tighter">
+                Innovación en tus manos,<br><span class="text-gradient">tecnología a tu alcance.</span>
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light">
+                Precios actualizados diariamente. <span class="text-white font-semibold">Consultar stock por WhatsApp.</span>
+            </p>
+            <div class="mt-10 flex justify-center gap-4">
+                <a href="#productos" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-bold transition-all">Ver Catálogo</a>
+                <a href="https://wa.me/5491112345678" class="bg-white/5 hover:bg-white/10 border border-white/10 text-white px-8 py-4 rounded-2xl font-bold transition-all">Soporte VIP</a>
+            </div>
+        </div>
+    </section>
 
-    <div class="max-w-6xl mx-auto px-6 mb-8 flex flex-wrap gap-2">
-        <button onclick="filter('all')" class="bg-black text-white px-4 py-2 rounded-lg text-sm">Todos</button>
-        <button onclick="filter('iPhone')" class="bg-white border px-4 py-2 rounded-lg text-sm hover:bg-gray-100">iPhone</button>
-        <button onclick="filter('Samsung')" class="bg-white border px-4 py-2 rounded-lg text-sm hover:bg-gray-100">Samsung</button>
-        <button onclick="filter('Xiaomi')" class="bg-white border px-4 py-2 rounded-lg text-sm hover:bg-gray-100">Xiaomi</button>
+    <div class="max-w-6xl mx-auto px-6 -mt-8 relative z-20 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="glass p-6 rounded-3xl text-center">
+            <p class="text-2xl font-bold">100%</p>
+            <p class="text-xs text-gray-500 uppercase">Originales</p>
+        </div>
+        <div class="glass p-6 rounded-3xl text-center">
+            <p class="text-2xl font-bold">Gremio</p>
+            <p class="text-xs text-gray-500 uppercase">Los mejores precios</p>
+        </div>
+        <div class="glass p-6 rounded-3xl text-center">
+            <p class="text-2xl font-bold">Envíos</p>
+            <p class="text-xs text-gray-500 uppercase">A todo el país</p>
+        </div>
+        <div class="glass p-6 rounded-3xl text-center">
+            <p class="text-2xl font-bold">Garantía</p>
+            <p class="text-xs text-gray-500 uppercase">Soporte Técnico</p>
+        </div>
     </div>
 
-    <main id="product-grid" class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-20">
+    <div id="productos" class="max-w-6xl mx-auto px-6 mt-20 mb-10 flex flex-wrap justify-center gap-4">
+        <button onclick="filter('all')" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-blue-500/20">Todos los modelos</button>
+        <button onclick="filter('iPhone')" class="glass hover:bg-white/10 px-6 py-3 rounded-xl font-bold text-sm transition-all">iPhone</button>
+        <button onclick="filter('Samsung')" class="glass hover:bg-white/10 px-6 py-3 rounded-xl font-bold text-sm transition-all">Samsung</button>
+        <button onclick="filter('Xiaomi')" class="glass hover:bg-white/10 px-6 py-3 rounded-xl font-bold text-sm transition-all">Xiaomi</button>
+    </div>
+
+    <main id="product-grid" class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-32">
         </main>
 
-    <a href="https://wa.me/TUNUMERO" class="fixed bottom-6 right-6 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
+    <a href="https://wa.me/5491112345678" class="fixed bottom-8 right-8 bg-[#25d366] text-white p-5 rounded-2xl shadow-2xl hover:scale-110 transition-transform z-50">
         <i class="fa-brands fa-whatsapp text-3xl"></i>
     </a>
 
     <script>
-        // CONFIGURACIÓN DE TU GANANCIA
-        const DOLAR_BLUE = 1250; // Ajustar según el día
+        // CONFIGURACIÓN DE PRECIOS
+        const VALOR_BLUE_REAL = 1250; 
+        const SPREAD_SEGURIDAD = 1.02; // +2% para cubrirte de variaciones
+        const COTIZACION_VENTA = Math.round(VALOR_BLUE_REAL * SPREAD_SEGURIDAD);
         
         const products = [
-            { name: "iPhone 17 Pro Max 256GB", brand: "iPhone", cost: 1500, cat: "high" },
-            { name: "iPhone 17 Pro 512GB", brand: "iPhone", cost: 1550, cat: "high" },
-            { name: "Samsung S25 Ultra 512GB", brand: "Samsung", cost: 1130, cat: "high" },
-            { name: "Galaxy A56 256GB", brand: "Samsung", cost: 400, cat: "mid" },
-            { name: "Redmi Note 15 Pro 5G", brand: "Xiaomi", cost: 340, cat: "mid" },
-            { name: "Galaxy A16 128GB", brand: "Samsung", cost: 140, cat: "low" },
-            { name: "Redmi 15C 256GB", brand: "Xiaomi", cost: 150, cat: "low" },
-            { name: "Poco C71 64GB", brand: "Xiaomi", cost: 90, cat: "low" }
+            { name: "iPhone 17 Pro Max 256GB", brand: "iPhone", cost: 1500, cat: "high", img: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&q=80&w=400" },
+            { name: "Samsung S25 Ultra 512GB", brand: "Samsung", cost: 1130, cat: "high", img: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=400" },
+            { name: "iPhone 13 128GB", brand: "iPhone", cost: 580, cat: "mid", img: "https://images.unsplash.com/photo-1632661674596-df8be070a5c5?auto=format&fit=crop&q=80&w=400" },
+            { name: "Galaxy A56 256GB", brand: "Samsung", cost: 400, cat: "mid", img: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?auto=format&fit=crop&q=80&w=400" },
+            { name: "Redmi Note 15 Pro", brand: "Xiaomi", cost: 340, cat: "mid", img: "https://images.unsplash.com/photo-1605170439002-90f450c99706?auto=format&fit=crop&q=80&w=400" },
+            { name: "Redmi 15C 256GB", brand: "Xiaomi", cost: 150, cat: "low", img: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&q=80&w=400" }
         ];
 
         function calculatePrice(cost, cat) {
-            let margin = 1.06; // Alta gama 6%
+            let margin = 1.06; // Alta 6%
             if(cat === 'mid') margin = 1.10; // Media 10%
             if(cat === 'low') margin = 1.15; // Baja 15%
             return Math.round(cost * margin);
@@ -64,23 +114,29 @@
         function renderProducts(filterBrand = 'all') {
             const grid = document.getElementById('product-grid');
             grid.innerHTML = '';
-            
             const filtered = filterBrand === 'all' ? products : products.filter(p => p.brand === filterBrand);
 
             filtered.forEach(p => {
                 const finalUSD = calculatePrice(p.cost, p.cat);
-                const finalARS = new Intl.NumberFormat('es-AR').format(finalUSD * DOLAR_BLUE);
-                
+                const finalARS = new Intl.NumberFormat('es-AR').format(finalUSD * COTIZACION_VENTA);
                 grid.innerHTML += `
-                    <div class="bg-white border border-gray-100 rounded-2xl p-6 card-hover shadow-sm hover:shadow-xl">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-blue-500">${p.brand}</span>
-                        <h3 class="text-xl font-bold mt-1 mb-4">${p.name}</h3>
-                        <div class="flex justify-between items-end">
-                            <div>
-                                <p class="text-3xl font-black text-gray-900">USD ${finalUSD}</p>
-                                <p class="text-sm text-gray-400">ARS ${finalARS}</p>
+                    <div class="tech-card bg-zinc-900/50 rounded-[32px] overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="${p.img}" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" alt="${p.name}">
+                        </div>
+                        <div class="p-8">
+                            <span class="text-[10px] font-bold uppercase tracking-[3px] text-blue-500">${p.brand}</span>
+                            <h3 class="text-xl font-bold mt-2 mb-6 h-12">${p.name}</h3>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-sm text-gray-500 font-medium">Precio Final</p>
+                                    <p class="text-3xl font-black italic">USD ${finalUSD}</p>
+                                    <p class="text-xs text-blue-400 mt-1">~ ARS ${finalARS}</p>
+                                </div>
+                                <a href="https://wa.me/5491112345678?text=Hola! Me interesa el ${p.name}" class="bg-white text-black p-4 rounded-2xl hover:bg-blue-500 hover:text-white transition-colors">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </a>
                             </div>
-                            <button class="bg-black text-white text-xs font-bold py-2 px-4 rounded-full uppercase">Consultar</button>
                         </div>
                     </div>
                 `;
@@ -88,7 +144,7 @@
         }
 
         function filter(brand) { renderProducts(brand); }
-        document.getElementById('dolar-val').innerText = `$${DOLAR_BLUE}`;
+        document.getElementById('dolar-val').innerText = `USD/ARS $${COTIZACION_VENTA}`;
         renderProducts();
     </script>
 </body>
