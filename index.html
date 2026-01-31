@@ -1,141 +1,111 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OLAMAI-TEC | E-Commerce Pro 2026</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .tech-gradient { background: linear-gradient(135deg, #00d2ff 0%, #9258ff 100%); }
-        .product-card { transition: all 0.3s ease; display: block; }
-        .product-card.hidden { display: none; }
-        .active-filter { background: #3b82f6 !important; color: white !important; border-color: #3b82f6 !important; }
-    </style>
-</head>
-<body>
+const db = [
+            // --- CELULARES APPLE (iPhone) ---
+            { brand: "Apple", name: "iPhone 16 Pro Max 256GB", cat: "celulares", sub: "iPhone", price: 1420 },
+            { brand: "Apple", name: "iPhone 16 Pro 128GB", cat: "celulares", sub: "iPhone", price: 1210 },
+            { brand: "Apple", name: "iPhone 16 Plus 128GB", cat: "celulares", sub: "iPhone", price: 1045 },
+            { brand: "Apple", name: "iPhone 16 128GB", cat: "celulares", sub: "iPhone", price: 925 },
+            { brand: "Apple", name: "iPhone 15 Pro Max 256GB", cat: "celulares", sub: "iPhone", price: 1280 },
+            { brand: "Apple", name: "iPhone 15 Pro 128GB", cat: "celulares", sub: "iPhone", price: 1090 },
+            { brand: "Apple", name: "iPhone 15 128GB", cat: "celulares", sub: "iPhone", price: 815 },
+            { brand: "Apple", name: "iPhone 14 128GB", cat: "celulares", sub: "iPhone", price: 730 },
+            { brand: "Apple", name: "iPhone 13 128GB", cat: "celulares", sub: "iPhone", price: 640 },
+            { brand: "Apple", name: "iPhone 12 64GB New", cat: "celulares", sub: "iPhone", price: 510 },
+            { brand: "Apple", name: "iPhone 11 64GB New", cat: "celulares", sub: "iPhone", price: 425 },
 
-    <nav class="fixed w-full z-50 glass py-4 px-6 flex justify-between items-center border-b border-white/10">
-        <div class="text-2xl font-black tracking-tighter">OLAMAI<span class="text-blue-500">-TEC</span></div>
-        <div class="flex gap-4">
-            <input type="text" id="searchInput" placeholder="Buscar producto..." class="bg-white/5 border border-white/10 px-4 py-1 rounded-full text-sm focus:outline-none focus:border-blue-500">
-        </div>
-    </nav>
+            // --- CELULARES SAMSUNG ---
+            { brand: "Samsung", name: "Galaxy S25 Ultra 512GB", cat: "celulares", sub: "Samsung", price: 1380 },
+            { brand: "Samsung", name: "Galaxy S25 Plus 256GB", cat: "celulares", sub: "Samsung", price: 1150 },
+            { brand: "Samsung", name: "Galaxy S24 Ultra 256GB", cat: "celulares", sub: "Samsung", price: 1195 },
+            { brand: "Samsung", name: "Galaxy S24 Plus 256GB", cat: "celulares", sub: "Samsung", price: 980 },
+            { brand: "Samsung", name: "Galaxy S24 FE 128GB", cat: "celulares", sub: "Samsung", price: 745 },
+            { brand: "Samsung", name: "Galaxy S23 Ultra 256GB", cat: "celulares", sub: "Samsung", price: 1020 },
+            { brand: "Samsung", name: "Galaxy Z Fold 6 256GB", cat: "celulares", sub: "Samsung", price: 1650 },
+            { brand: "Samsung", name: "Galaxy Z Flip 6 256GB", cat: "celulares", sub: "Samsung", price: 1080 },
+            { brand: "Samsung", name: "Galaxy A55 256GB", cat: "celulares", sub: "Samsung", price: 510 },
+            { brand: "Samsung", name: "Galaxy A35 128GB", cat: "celulares", sub: "Samsung", price: 395 },
+            { brand: "Samsung", name: "Galaxy A25 128GB", cat: "celulares", sub: "Samsung", price: 315 },
+            { brand: "Samsung", name: "Galaxy A15 4G 128GB", cat: "celulares", sub: "Samsung", price: 210 },
+            { brand: "Samsung", name: "Galaxy A05s 128GB", cat: "celulares", sub: "Samsung", price: 185 },
 
-    <header class="h-[50vh] flex flex-col items-center justify-center text-center pt-20 px-4">
-        <h1 class="text-5xl md:text-7 font-black mb-4 tech-gradient text-transparent bg-clip-text">OLAMAI-TEC 2026</h1>
-        <p class="text-gray-400 max-w-xl">Tu tienda de importación directa: Tecnología, Fragancias de Nicho y Hogar Inteligente.</p>
-    </header>
+            // --- CELULARES MOTOROLA ---
+            { brand: "Motorola", name: "Edge 50 Ultra", cat: "celulares", sub: "Motorola", price: 1150 },
+            { brand: "Motorola", name: "Edge 50 Pro", cat: "celulares", sub: "Motorola", price: 720 },
+            { brand: "Motorola", name: "Edge 50 Fusion", cat: "celulares", sub: "Motorola", price: 540 },
+            { brand: "Motorola", name: "Razr 50 Ultra", cat: "celulares", sub: "Motorola", price: 1050 },
+            { brand: "Motorola", name: "Edge 40 Neo", cat: "celulares", sub: "Motorola", price: 460 },
+            { brand: "Motorola", name: "Moto G85 5G", cat: "celulares", sub: "Motorola", price: 385 },
+            { brand: "Motorola", name: "Moto G54 5G", cat: "celulares", sub: "Motorola", price: 295 },
+            { brand: "Motorola", name: "Moto G24 Power", cat: "celulares", sub: "Motorola", price: 215 },
 
-    <section class="max-w-7xl mx-auto px-6 mb-10 overflow-x-auto">
-        <div class="flex flex-nowrap md:justify-center gap-3" id="filterContainer">
-            <button onclick="filterCat('all')" class="category-btn active-filter px-6 py-2 rounded-full border border-white/20 text-sm whitespace-nowrap">TODOS</button>
-            <button onclick="filterCat('celulares')" class="category-btn px-6 py-2 rounded-full border border-white/20 text-sm whitespace-nowrap">SMARTPHONES</button>
-            <button onclick="filterCat('audio')" class="category-btn px-6 py-2 rounded-full border border-white/20 text-sm whitespace-nowrap">AUDIO JBL</button>
-            <button onclick="filterCat('perfumes')" class="category-btn px-6 py-2 rounded-full border border-white/20 text-sm whitespace-nowrap">FRAGANCIAS</button>
-            <button onclick="filterCat('nicho')" class="category-btn px-6 py-2 rounded-full border border-white/20 text-sm whitespace-nowrap">LUJO/NICHO</button>
-            <button onclick="filterCat('hogar')" class="category-btn px-6 py-2 rounded-full border border-white/20 text-sm whitespace-nowrap">XIAOMI HOME</button>
-        </div>
-    </section>
+            // --- CELULARES XIAOMI / HONOR / REALME / PIXEL ---
+            { brand: "Xiaomi", name: "Xiaomi 14 Ultra", cat: "celulares", sub: "Xiaomi", price: 1250 },
+            { brand: "Xiaomi", name: "Poco F6 Pro 512GB", cat: "celulares", sub: "Xiaomi", price: 680 },
+            { brand: "Xiaomi", name: "Redmi Note 13 Pro+ 5G", cat: "celulares", sub: "Xiaomi", price: 495 },
+            { brand: "Xiaomi", name: "Redmi 13C 128GB", cat: "celulares", sub: "Xiaomi", price: 175 },
+            { brand: "Honor", name: "Honor 200 Pro 5G", cat: "celulares", sub: "Honor", price: 815 },
+            { brand: "Honor", name: "Honor Magic 6 Lite", cat: "celulares", sub: "Honor", price: 410 },
+            { brand: "Realme", name: "Realme GT 6", cat: "celulares", sub: "Realme", price: 740 },
+            { brand: "Google", name: "Pixel 9 Pro XL", cat: "celulares", sub: "Google", price: 1350 },
 
-    <main class="max-w-7xl mx-auto px-6 pb-20">
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6" id="productGrid">
-            </div>
-    </main>
+            // --- PERFUMES LACOSTE ---
+            { brand: "Lacoste", name: "Booster 125ml EDT", cat: "perfumes", price: 62 },
+            { brand: "Lacoste", name: "L'Homme 100ml EDT", cat: "perfumes", price: 82 },
+            { brand: "Lacoste", name: "L.12.12 Blanc Kit 100ml", cat: "perfumes", price: 91 },
+            { brand: "Lacoste", name: "L.12.12 Blanc Intense 100ml", cat: "perfumes", price: 83 },
+            { brand: "Lacoste", name: "L.12.12 Noir 100ml EDT", cat: "perfumes", price: 78 },
+            { brand: "Lacoste", name: "Touch of Pink 90ml", cat: "perfumes", price: 74 },
 
-    <script>
-        // BASE DE DATOS UNIFICADA (Precios con ganancia aplicada)
-        const products = [
-            // TECNO
-            { name: "iPhone 17 Pro Max 256GB", cat: "celulares", price: 1450, desc: "Titanium Desert" },
-            { name: "Samsung S25 Ultra 512GB", cat: "celulares", price: 1380, desc: "AI Integration" },
-            { name: "Nintendo Switch 2 OLED", cat: "celulares", price: 650, desc: "Consola Next-Gen" },
-            
-            // AUDIO JBL
-            { name: "JBL Party Box 710", cat: "audio", price: 855, desc: "800W RMS Bivolt" },
-            { name: "JBL Boombox 4", cat: "audio", price: 535, desc: "Bluetooth 5.4" },
-            { name: "JBL Charge 6", cat: "audio", price: 185, desc: "Portable Waterproof" },
-            { name: "JBL Xtreme 4", cat: "audio", price: 285, desc: "Sonido Inmersivo" },
-            { name: "JBL Party Box Encore (2 Mic)", cat: "audio", price: 465, desc: "Karaoke Ready" },
+            // --- PERFUMES LANCOME ---
+            { brand: "Lancome", name: "La Vie Est Belle 100ml EDP", cat: "perfumes", price: 106 },
+            { brand: "Lancome", name: "Idole Now 100ml Parfum", cat: "perfumes", price: 118 },
+            { brand: "Lancome", name: "Hypnose 75ml EDP", cat: "perfumes", price: 94 },
+            { brand: "Lancome", name: "Miracle 100ml EDP", cat: "perfumes", price: 110 },
 
-            // PERFUMES DISEÑADOR
-            { name: "Lacoste L12.12 Blanc 100ml", cat: "perfumes", price: 85, desc: "Eau de Toilette" },
-            { name: "Lancome La Vie Est Belle 100ml", cat: "perfumes", price: 108, desc: "Eau de Parfum" },
-            { name: "Paco Rabanne 1 Million 100ml", cat: "perfumes", price: 88, desc: "Legendary Scent" },
-            { name: "Versace Eros 200ml EDT", cat: "perfumes", price: 108, desc: "Max Size" },
-            { name: "Mont Blanc Explorer 100ml", cat: "perfumes", price: 78, desc: "Adventurer Spirit" },
-            { name: "Victoria Secret Very Sexy 100ml", cat: "perfumes", price: 119, desc: "Original EDP" },
+            // --- PERFUMES MONT BLANC ---
+            { brand: "Mont Blanc", name: "Explorer 100ml EDP", cat: "perfumes", price: 76 },
+            { brand: "Mont Blanc", name: "Legend 100ml EDT", cat: "perfumes", price: 71 },
+            { brand: "Mont Blanc", name: "Individuel 75ml EDT", cat: "perfumes", price: 57 },
+            { brand: "Mont Blanc", name: "Signature 90ml EDP", cat: "perfumes", price: 77 },
 
-            // NICHO & LUJO
-            { name: "Xerjoff Tony Iommi 100ml", cat: "nicho", price: 375, desc: "Monkey Special" },
-            { name: "Creed Viking 100ml", cat: "nicho", price: 430, desc: "Parfum Royale" },
-            { name: "Tom Ford Lost Cherry 100ml", cat: "nicho", price: 405, desc: "Eau de Parfum" },
-            { name: "Bond No. 9 Central Park West", cat: "nicho", price: 370, desc: "Luxury New York" },
-            { name: "Xerjoff Alexandria III 50ml", cat: "nicho", price: 375, desc: "Premium Parfum" },
+            // --- PERFUMES NICHO (Xerjoff, Creed, Tom Ford, etc.) ---
+            { brand: "Xerjoff", name: "Tony Iommi Monkey Special 100ml", cat: "perfumes", price: 375 },
+            { brand: "Xerjoff", name: "Alexandria III 50ml Parfum", cat: "perfumes", price: 375 },
+            { brand: "Xerjoff", name: "Erba Pura 100ml EDP", cat: "perfumes", price: 300 },
+            { brand: "Creed", name: "Viking 100ml EDP", cat: "perfumes", price: 430 },
+            { brand: "Tom Ford", name: "Lost Cherry 100ml EDP", cat: "perfumes", price: 405 },
+            { brand: "Tom Ford", name: "F***ing Fabulous 100ml", cat: "perfumes", price: 506 },
+            { brand: "Bond No. 9", name: "Central Park West 100ml", cat: "perfumes", price: 368 },
+            { brand: "Kilian", name: "Intoxicated 50ml EDP", cat: "perfumes", price: 311 },
 
-            // HOGAR XIAOMI
-            { name: "Xiaomi Vacuum X20 Max", cat: "hogar", price: 765, desc: "Trapeado Térmico" },
-            { name: "Xiaomi Vacuum X20 Pro", cat: "hogar", price: 655, desc: "Autovaciado" },
-            { name: "Xiaomi Vacuum S20+", cat: "hogar", price: 435, desc: "Navegación Láser" },
-            { name: "Xiaomi Vacuum E10 White", cat: "hogar", price: 215, desc: "Slim Design" }
+            // --- PERFUMES PACO RABANNE / RALPH LAUREN / VERSACE ---
+            { brand: "Paco Rabanne", name: "1 Million 100ml EDT", cat: "perfumes", price: 86 },
+            { brand: "Paco Rabanne", name: "Invictus 100ml EDT", cat: "perfumes", price: 83 },
+            { brand: "Ralph Lauren", name: "Polo Blue 125ml EDT", cat: "perfumes", price: 104 },
+            { brand: "Versace", name: "Eros 200ml EDT", cat: "perfumes", price: 105 },
+            { brand: "Versace", name: "Blue Jeans 75ml EDT", cat: "perfumes", price: 52 },
+            { brand: "Victoria Secret", name: "Bombshell Escape 50ml", cat: "perfumes", price: 102 },
+
+            // --- CONSOLAS ---
+            { brand: "Sony", name: "PlayStation 5 Slim 1TB", cat: "consolas", price: 720 },
+            { brand: "Sony", name: "PlayStation 5 Pro", cat: "consolas", price: 950 },
+            { brand: "Nintendo", name: "Switch OLED Mario Edition", cat: "consolas", price: 425 },
+            { brand: "Nintendo", name: "Switch Lite", cat: "consolas", price: 265 },
+            { brand: "Microsoft", name: "Xbox Series X", cat: "consolas", price: 740 },
+
+            // --- RELOJES / SMARTWATCH ---
+            { brand: "Apple", name: "Watch Ultra 2 (49mm)", cat: "relojes", price: 895 },
+            { brand: "Apple", name: "Watch Series 10 (45mm)", cat: "relojes", price: 540 },
+            { brand: "Garmin", name: "Fenix 8 Solar", cat: "relojes", price: 1150 },
+            { brand: "Garmin", name: "Forerunner 965", cat: "relojes", price: 740 },
+            { brand: "Samsung", name: "Galaxy Watch Ultra", cat: "relojes", price: 680 },
+
+            // --- OTROS (AUDIO JBL Y HOGAR XIAOMI) ---
+            { brand: "JBL", name: "PartyBox 710", cat: "otros", price: 885 },
+            { brand: "JBL", name: "PartyBox Club 120", cat: "otros", price: 462 },
+            { brand: "JBL", name: "Boombox 4 Bluetooth", cat: "otros", price: 542 },
+            { brand: "JBL", name: "Xtreme 4 Bluetooth", cat: "otros", price: 288 },
+            { brand: "Xiaomi", name: "Vacuum X20 Max", cat: "otros", price: 775 },
+            { brand: "Xiaomi", name: "Vacuum S20+ Bivolt", cat: "otros", price: 440 },
+            { brand: "Xiaomi", name: "Vacuum E10 White", cat: "otros", price: 215 },
+            { brand: "Karseell", name: "Mascara Capilar Colageno", cat: "otros", price: 35 }
         ];
-
-        const grid = document.getElementById('productGrid');
-        const searchInput = document.getElementById('searchInput');
-
-        function displayProducts(filteredList) {
-            grid.innerHTML = '';
-            filteredList.forEach(p => {
-                grid.innerHTML += `
-                    <div class="product-card glass p-5 rounded-2xl" data-cat="${p.cat}">
-                        <div class="w-full h-40 bg-white/5 rounded-xl mb-4 flex items-center justify-center">
-                            <i class="fas ${getIcon(p.cat)} text-4xl text-blue-500/50"></i>
-                        </div>
-                        <h3 class="font-bold text-lg mb-1">${p.name}</h3>
-                        <p class="text-gray-500 text-xs mb-4">${p.desc}</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-black text-white">u$s ${p.price}</span>
-                            <a href="https://wa.me/TUNUMERO" class="bg-blue-600 p-2 rounded-lg hover:bg-blue-400 transition">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        function getIcon(cat) {
-            if(cat === 'celulares') return 'fa-mobile-alt';
-            if(cat === 'audio') return 'fa-volume-up';
-            if(cat === 'perfumes') return 'fa-spray-can';
-            if(cat === 'nicho') return 'fa-gem';
-            return 'fa-robot';
-        }
-
-        function filterCat(category) {
-            // Actualizar botones
-            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active-filter'));
-            event.target.classList.add('active-filter');
-
-            if(category === 'all') {
-                displayProducts(products);
-            } else {
-                const filtered = products.filter(p => p.cat === category);
-                displayProducts(filtered);
-            }
-        }
-
-        // Buscador en tiempo real
-        searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
-            const filtered = products.filter(p => p.name.toLowerCase().includes(term));
-            displayProducts(filtered);
-        });
-
-        // Carga inicial
-        displayProducts(products);
-    </script>
-</body>
-</html>
